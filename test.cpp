@@ -74,6 +74,6 @@ TEST_CASE("2 stresses, but both correct", ""){
     std::stringstream output;
     parseFile(input,output);
     REQUIRE(output.str() ==
-            "0"
+            "1"
     );
 }

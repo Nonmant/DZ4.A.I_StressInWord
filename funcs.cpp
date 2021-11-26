@@ -36,16 +36,9 @@ void parseFile(std::istream & input, std::ostream & output){
     unsigned int errors = 0;
     for(auto & w : sequence){
         auto stresses = extractStresses(w);
-        if(stresses.empty()){++errors; continue;}
+        if(stresses.size() != 1){++errors;continue;}
         if(dict.count(w)){
-            std::vector<int> intersection;
-            std::set_intersection(dict[w].begin(), dict[w].end(),
-                                  stresses.begin(), stresses.end(),
-                                  std::back_inserter(intersection));
-            if(intersection.size() != stresses.size())
-                ++errors;
-        } else {
-            if(stresses.size() != 1)
+            if(!dict[w].count(*stresses.begin()))
                 ++errors;
         }
     }
